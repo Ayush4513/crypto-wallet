@@ -8,3 +8,8 @@ function _generateMnemonic() {
   const entropy = mnemonicToEntropy(mnemonic, wordlist);
   return { mnemonic, entropy };
 }
+const { HDKey } = require("ethereum-cryptography/hdkey");
+
+function _getHdRootKey(_mnemonic) {
+  return HDKey.fromMasterSeed(_mnemonic);
+}
