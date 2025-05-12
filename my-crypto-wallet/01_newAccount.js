@@ -13,3 +13,7 @@ const { HDKey } = require("ethereum-cryptography/hdkey");
 function _getHdRootKey(_mnemonic) {
   return HDKey.fromMasterSeed(_mnemonic);
 }
+
+function _generatePrivateKey(_hdRootKey, _accountIndex) {
+  return _hdRootKey.deriveChild(_accountIndex).privateKey;
+}
