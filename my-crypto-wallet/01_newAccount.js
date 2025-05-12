@@ -29,3 +29,24 @@ const { keccak256 } = require("ethereum-cryptography/keccak");
 function _getEthAddress(_publicKey) {
   return keccak256(_publicKey).slice(-20);
 }
+const { bytesToHex } = require("ethereum-cryptography/utils");
+
+async function main() {
+  const { mnemonic, entropy } = _generateMnemonic();
+  console.log(`WARNING! Never disclose your Seed Phrase:\n ${mnemonic}`);
+
+  const hdRootKey = _getHdRootKey(entropy);
+  const accountOneIndex = 0;
+  const accountOnePrivateKey = _generatePrivateKey(hdRootKey, accountOneIndex);
+  const accountOnePublicKey = _getPublicKey(accountOnePrivateKey);
+  const accountOneAddress = _getEthAddress(accountOnePublicKey);
+  console.log(`Account One Wallet Address: 0x${bytesToHex(accountOneAddress)}`);
+}
+
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
+  
