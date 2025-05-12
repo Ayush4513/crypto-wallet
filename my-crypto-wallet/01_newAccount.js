@@ -17,3 +17,9 @@ function _getHdRootKey(_mnemonic) {
 function _generatePrivateKey(_hdRootKey, _accountIndex) {
   return _hdRootKey.deriveChild(_accountIndex).privateKey;
 }
+
+const { getPublicKey } = require("ethereum-cryptography/secp256k1");
+
+function _getPublicKey(_privateKey) {
+  return getPublicKey(_privateKey);
+}
