@@ -23,3 +23,9 @@ const { getPublicKey } = require("ethereum-cryptography/secp256k1");
 function _getPublicKey(_privateKey) {
   return getPublicKey(_privateKey);
 }
+
+const { keccak256 } = require("ethereum-cryptography/keccak");
+
+function _getEthAddress(_publicKey) {
+  return keccak256(_publicKey).slice(-20);
+}
